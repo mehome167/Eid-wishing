@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ عید مبارک! ✨</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Basic Reset & Body Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif; /* General text font */
+            background: linear-gradient(135deg, #006400, #32CD32, #006400); /* Dark Green to Lime Green Gradient */
+            color: #fff; /* Default text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scroll for firecrackers */
+            position: relative; /* Needed for absolute positioning of firecrackers */
+            flex-direction: column; /* For proper stacking of content and audio controls */
+        }
+
+        /* Firecracker Effect */
+        .firecracker-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allow clicks to pass through */
+            overflow: hidden; /* Hide particles outside viewport */
+            z-index: 0; /* Ensure firecrackers are behind main content */
+        }
+
+        .firecracker-particle {
+            position: absolute;
+            width: 6px; /* Slightly larger particles */
+            height: 6px;
+            background-color: gold; /* Golden particles */
+            border-radius: 50%;
+            opacity: 0;
+            animation: burst 1.7s ease-out infinite; /* Burst animation, slightly longer */
+        }
+
+        /* Define various starting positions and delays for particles */
+        /* Increased number and variety of particles */
+        .firecracker-particle:nth-child(3n+1) { background-color: yellow; animation-delay: 0s; top: 10%; left: 20%; animation-duration: 1.5s; }
+        .firecracker-particle:nth-child(3n+2) { background-color: orange; animation-delay: 0.3s; top: 80%; left: 70%; animation-duration: 1.8s; }
+        .firecracker-particle:nth-child(3n+3) { background-color: gold; animation-delay: 0.6s; top: 30%; left: 90%; animation-duration: 1.6s; }
+        .firecracker-particle:nth-child(5n+1) { background-color: #ff00ff; animation-delay: 0.1s; top: 50%; left: 50%; animation-duration: 2s; } /* Center burst */
+        .firecracker-particle:nth-child(5n+2) { background-color: cyan; animation-delay: 0.4s; top: 90%; left: 10%; animation-duration: 1.9s; }
+        .firecracker-particle:nth-child(5n+3) { background-color: limegreen; animation-delay: 0.7s; top: 15%; left: 60%; animation-duration: 1.7s; }
+        .firecracker-particle:nth-child(7n+1) { background-color: #ff4500; animation-delay: 0.2s; top: 20%; left: 80%; animation-duration: 2.1s; }
+        .firecracker-particle:nth-child(7n+2) { background-color: #ffff00; animation-delay: 0.5s; top: 70%; left: 30%; animation-duration: 2s; }
+        .firecracker-particle:nth-child(9n+1) { background-color: deepskyblue; animation-delay: 0.8s; top: 40%; left: 15%; animation-duration: 1.5s; }
+        .firecracker-particle:nth-child(9n+2) { background-color: hotpink; animation-delay: 1.1s; top: 60%; left: 85%; animation-duration: 1.8s; }
+        .firecracker-particle:nth-child(11n+1) { background-color: mediumpurple; animation-delay: 0.9s; top: 25%; left: 45%; animation-duration: 2.2s; }
+        .firecracker-particle:nth-child(11n+2) { background-color: lightgoldenrodyellow; animation-delay: 1.2s; top: 75%; left: 55%; animation-duration: 1.6s; }
+
+        @keyframes burst {
+            0% {
+                opacity: 1;
+                transform: scale(0) translate(0, 0);
+            }
+            50% {
+                 opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1) translate(calc((var(--random-x, 0.5) - 0.5) * 400px), calc((var(--random-y, 0.5) - 0.5) * 400px)); /* Explode outwards randomly, larger spread */
+            }
+        }
+        /* Add more specific styles for particles to scatter them more */
+        .firecracker-particle:nth-child(odd) { --random-x: 0.2; --random-y: 0.8; }
+        .firecracker-particle:nth-child(even) { --random-x: 0.7; --random-y: 0.3; }
+        .firecracker-particle:nth-child(4n+1) { --random-x: 0.9; --random-y: 0.1; }
+        .firecracker-particle:nth-child(4n+3) { --random-x: 0.1; --random-y: 0.9; }
+        .firecracker-particle:nth-child(5n) { --random-x: 0.5; --random-y: 0.5; } /* Some straight bursts */
+
+
+        /* Main Container for Content - mimicking screenshot */
+        .container {
+            background-color: rgba(0, 0, 0, 0.3); /* Darker semi-transparent background */
+            backdrop-filter: blur(10px); /* Apply blur for glass effect */
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            border-radius: 20px;
+            padding: 20px; /* Reduced padding for compact look */
+            margin: 20px;
+            max-width: 400px; /* Adjusted max-width */
+            width: 90%;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4); /* Darker shadow */
+            border: 2px solid; /* Solid border as per screenshot */
+            border-image: linear-gradient(45deg, #FFD700, #32CD32, #FFD700); /* Golden to Green gradient border */
+            border-image-slice: 1;
+            text-align: center;
+            animation: fadeInScale 0.8s ease-out; /* Container entry animation */
+            position: relative; /* Ensure container is above firecrackers */
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 30px; /* Extra padding at bottom for content */
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* GIF Image Container - to keep it within the border */
+        .gif-frame {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background for GIF */
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #32CD32, #FFD700, #32CD32); /* Green to Golden gradient border for GIF frame */
+            border-image-slice: 1;
+            border-radius: 15px; /* Rounded corners for the frame */
+            padding: 8px; /* Padding inside the frame */
+            margin-bottom: 20px;
+            width: 100%; /* Take full width of parent */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+        }
+
+        .eid-gif {
+            display: block;
+            max-width: 100%; /* Responsive image */
+            height: auto;
+            border-radius: 10px; /* Slightly smaller border-radius inside the frame */
+        }
+
+        /* Main Greeting Text - Eid Mubarak */
+        .greeting-text-main {
+            font-family: 'Dancing Script', cursive; /* Screenshot-like font */
+            font-size: 2.8rem; /* Larger size */
+            margin-bottom: 10px; /* Reduced margin */
+            font-weight: 700; /* Bolder */
+            background: linear-gradient(45deg, gold, #ffb142, #fff); /* Golden/White Gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* Golden glow */
+            animation: textFadeIn 1.5s ease-out; /* Text entry animation */
+            white-space: nowrap; /* Prevent line breaks for small screens if possible */
+        }
+        @media (max-width: 480px) {
+            .greeting-text-main {
+                font-size: 2.2rem; /* Adjust for smaller screens */
+            }
+        }
+
+        @keyframes textFadeIn {
+             from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* "From Rahul" style text (dynamic sender name) */
+        .sender-name {
+            font-size: 1.2rem;
+            color: gold; /* Golden color as per screenshot */
+            margin-bottom: 15px; /* Spacing */
+            font-weight: 600;
+        }
+
+        /* Main wish text */
+        .greeting-wish-main {
+            font-size: 1.1rem; /* Slightly smaller than sender name */
+            color: #ccc; /* Lighter color */
+            margin-bottom: 25px; /* Spacing */
+            line-height: 1.4;
+        }
+
+        /* Input Label */
+        .input-label {
+            font-size: 1rem;
+            color: gold; /* Golden color */
+            margin-bottom: 10px;
+            align-self: flex-start; /* Align to left within flex container */
+            padding-left: 10px; /* Match input padding */
+        }
+
+        /* Input Field */
+        .name-input {
+            display: block;
+            width: calc(100% - 20px); /* Full width minus padding */
+            padding: 12px 10px; /* Adjusted padding */
+            margin-bottom: 25px; /* Spacing */
+            border: 2px solid gold; /* Golden border */
+            border-radius: 8px;
+            background-color: rgba(255, 215, 0, 0.1); /* Light golden background */
+            color: #fff;
+            font-size: 1rem;
+            outline: none; /* Remove default outline */
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .name-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .name-input:focus {
+            border-color: white;
+            background-color: rgba(255, 215, 0, 0.2);
+        }
+
+        /* Generate & Share Button */
+        .share-button {
+            display: inline-block;
+            padding: 15px 30px; /* Larger padding for prominent button */
+            border: none; /* No border for this button */
+            border-radius: 10px; /* More rounded corners */
+            background: linear-gradient(to right, #32CD32, #FFD700); /* Green to Golden gradient */
+            color: #000; /* Black text for contrast */
+            font-size: 1.1rem; /* Larger font size */
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            outline: none;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Space between icon and text */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Initial shadow */
+            width: calc(100% - 40px); /* Full width minus side padding */
+            margin-top: 10px; /* Spacing from input */
+            animation: pulseButton 2s infinite ease-in-out; /* Pulsing animation */
+        }
+
+        .share-button:hover {
+            transform: translateY(-3px); /* Subtle lift effect */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+        }
+
+        .share-button:active {
+            transform: translateY(0); /* Press down effect */
+            box-shadow: none;
+        }
+
+        @keyframes pulseButton {
+            0% {
+                box-shadow: 0 0 0 0 rgba(50, 205, 50, 0.7); /* Green pulse */
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(50, 205, 50, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(50, 205, 50, 0);
+            }
+        }
+        
+        /* WhatsApp icon in button */
+        .share-button::before {
+            content: '💬'; /* Chat bubble emoji */
+            font-size: 1.3em;
+        }
+
+
+        /* Generated Wish Message Box - Initially hidden */
+        .generated-wish-box {
+            background-color: rgba(255, 215, 0, 0.15); /* Light golden background */
+            border-radius: 10px;
+            border: 1px solid gold; /* Golden border */
+            padding: 15px;
+            margin-top: 25px; /* Spacing from button */
+            color: gold; /* Golden text for wish */
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            word-wrap: break-word;
+            min-height: 50px; /* Minimum height to show content */
+            opacity: 0; /* Initially invisible */
+            visibility: hidden; /* Hide from layout */
+            transition: opacity 0.5s ease-in-out, visibility 0s linear 0.5s;
+            line-height: 1.5;
+        }
+
+        .generated-wish-box.visible {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0s;
+        }
+
+        /* Audio Controls - Bottom Right */
+        #audioControls {
+            position: fixed; /* Fixed to screen */
+            bottom: 15px;
+            right: 15px;
+            z-index: 10; /* Ensure it's above everything */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            border-radius: 20px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between elements */
+            transition: background-color 0.3s ease;
+        }
+
+         #audioControls:hover {
+             background-color: rgba(0, 0, 0, 0.7);
+         }
+
+        #muteButton {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8em; /* Icon size */
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            line-height: 1; /* Align vertically */
+            transition: color 0.2s ease;
+        }
+
+        #muteButton:hover {
+            color: gold;
+        }
+
+        #backgroundMusic {
+            display: none; /* Hide the default audio element */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                margin: 15px;
+            }
+            .greeting-text-main {
+                font-size: 2.2rem;
+            }
+            .sender-name {
+                font-size: 1.1rem;
+            }
+            .greeting-wish-main {
+                font-size: 1rem;
+            }
+            .name-input {
+                padding: 10px 8px;
+                width: calc(100% - 16px);
+            }
+            .share-button {
+                padding: 12px 20px;
+                font-size: 1rem;
+                width: calc(100% - 40px);
+            }
+             .generated-wish-box {
+                 font-size: 1rem;
+                 padding: 10px;
+                 min-height: 40px;
+             }
+            #audioControls {
+                bottom: 10px;
+                right: 10px;
+                padding: 6px 10px;
+                gap: 8px;
+            }
+             #muteButton {
+                 font-size: 1.5em;
+             }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="firecracker-container">
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+        <span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span><span class="firecracker-particle"></span>
+    </div>
+
+    <div class="container">
+        <div class="gif-frame">
+            <img src="eid.gif" alt="Festive Eid Animation" class="eid-gif">
+        </div>
+
+        <p class="greeting-text-main">
+            ✨ Eid Mubarak! ✨
+        </p>
+
+        <p id="senderNameDisplay" class="sender-name">
+            From [Your Name]
+        </p>
+
+        <p class="greeting-wish-main">
+            Wishing you and your family a blessed Eid-ul-Adha!
+        </p>
+
+        <label for="nameInput" class="input-label">Your Name:</label>
+        <input type="text" id="nameInput" class="name-input" placeholder="Enter your name">
+
+        <button id="generateShareBtn" class="share-button">
+            Create & Share Eid Greeting
+        </button>
+
+        <div id="generatedWishBox" class="generated-wish-box">
+            </div>
+    </div>
+
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="audioControls">
+        <button id="muteButton">🔊</button> </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nameInput = document.getElementById('nameInput');
+            const generateShareBtn = document.getElementById('generateShareBtn');
+            const senderNameDisplay = document.getElementById('senderNameDisplay');
+            const generatedWishBox = document.getElementById('generatedWishBox');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            const muteButton = document.getElementById('muteButton');
+
+            // --- Audio Control ---
+            // Attempt to play music immediately (might be blocked by browser policies)
+            backgroundMusic.play().catch(error => {
+                console.log("Autoplay blocked or failed:", error);
+                // If autoplay is blocked, show muted icon initially as a visual cue
+                muteButton.textContent = '🔇';
+            });
+
+            muteButton.addEventListener('click', () => {
+                if (backgroundMusic.muted) {
+                    backgroundMusic.muted = false;
+                    muteButton.textContent = '🔊'; // Speaker icon
+                    // Try to play if it was paused due to autoplay policy
+                    backgroundMusic.play().catch(e => console.log("Play after unmute failed:", e));
+                } else {
+                    backgroundMusic.muted = true;
+                    muteButton.textContent = '🔇'; // Muted icon
+                }
+            });
+
+            // Update sender name display as user types
+            nameInput.addEventListener('input', () => {
+                const name = nameInput.value.trim();
+                senderNameDisplay.textContent = name ? `From ${name}` : 'From [Your Name]';
+            });
+
+            // --- Generate & Share Logic ---
+            generateShareBtn.addEventListener('click', () => {
+                const name = nameInput.value.trim();
+                let wishMessageForDisplay;
+                let wishMessageForShare;
+
+                if (name) {
+                    wishMessageForDisplay = `Eid Mubarak from ${name}! 🎉 Wishing you happiness and blessings!`;
+                    wishMessageForShare = `Eid Mubarak from ${name}! 🎉 Wishing you happiness and blessings!`;
+                } else {
+                    wishMessageForDisplay = `Eid Mubarak! 🎉 Wishing you happiness and blessings! (Please enter your name for a personalized wish!)`;
+                    wishMessageForShare = `Eid Mubarak! 🎉 Wishing you happiness and blessings!`; // Keep share message clean without "enter name" prompt
+                }
+
+                // Display the wish in the hidden box
+                generatedWishBox.textContent = wishMessageForDisplay;
+                generatedWishBox.classList.add('visible'); // Make it visible
+
+                // Construct the share URL
+                const pageUrl = window.location.href;
+                const fullShareMessage = `${wishMessageForShare}\n\nCheck out this Eid greeting card here:\n${pageUrl}`;
+                const shareText = encodeURIComponent(fullShareMessage);
+
+                // Open WhatsApp share window
+                const whatsappUrl = `https://wa.me/?text=${shareText}`; // wa.me for better universal compatibility
+                window.open(whatsappUrl, '_blank');
+            });
+
+            // Allow pressing Enter in the input field to trigger the button click
+            nameInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    generateShareBtn.click();
+                }
+            });
+            
+            // Initial state: hide generated wish box and set default sender name
+            senderNameDisplay.textContent = 'From [Your Name]';
+            generatedWishBox.classList.remove('visible'); // Ensure it's hidden on load
+        });
+    </script>
+</body>
+</html>
